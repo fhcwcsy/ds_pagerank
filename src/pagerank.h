@@ -15,7 +15,6 @@
 #include <string>
 #include <set>
 #include <vector>
-#include <iostream>
 
 #define PAGEPATH "./input/web-search-files2/"
 #define SEARCH_INPUT_PATH "./input/list.txt"

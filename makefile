@@ -1,10 +1,9 @@
 # CC and CFLAGS are varilables
 CC = g++
 CFLAGS = -c
-AR = ar
 ARFLAGS = rcv
 # -c option ask g++ to compile the source files, but do not link.
-# -O2 option is for optimized version
+# -O3 option is for optimized version
 OPTFLAGS = -O3
 
 all	: bin/pagerank
