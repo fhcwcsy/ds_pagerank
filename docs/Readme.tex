@@ -6,6 +6,7 @@
 \usepackage[margin=0.9in]{geometry}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{mathtools}
 %Packages END
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -82,7 +83,8 @@ The output is generated in the following steps:
 The space complexity is $O\left(n^2\right)$ since we need to save all the pages,
 and the size of each pages is $O(n)$ (assuming sorting does not use memory exceeding
 $O\left(n^2\right)$). To analyze time complexity, we first examine
-each steps:
+the complexity of each steps. Note that for simplicity we only consider the worst
+case scenario.
 
 \begin{enumerate}
 	\item Reading input\\
@@ -106,7 +108,21 @@ each steps:
 	The time complexity of this step is obviously $O(n)$.
 
 	\item Searching\\
-
+	Sorting the results takes $O(n\log n)$ for both single-word and multiple-word.
+	Since \texttt{map} in STL is implemented with an RB tree, it also takes
+	$O(\log n)$ time to find the word in the wordlist. For a $m$-multiple-word
+	search, Finding the union takes $O(mn)$, and finding the intersection takes
+	$O(mn\log n)$. Therefore the overall time complexity of this step is
+	\begin{equation*}
+		O\left(\underbrace{s_1 n \log n}_\text{single-word search} + 
+		\underbrace{\sum_m s_m mn\log n}_{m\text{-multiple-words search}}\right)
+	\end{equation*}
+	where $s_m$ is the number of $m$-multiple-word searches.
 \end{enumerate}
+From the analysis above, we can see that the total time complexity is:
+\begin{equation*}
+	O\left(n^2 + nw -\log d - \log \text{DIFF} + s_1 n \log n + \sum_m s_m mn\log n\right)
+\end{equation*}
+
 
 \end{document}
