@@ -1,7 +1,6 @@
 # CC and CFLAGS are varilables
 CC = g++
 CFLAGS = -c
-ARFLAGS = rcv
 # -c option ask g++ to compile the source files, but do not link.
 # -O3 option is for optimized version
 OPTFLAGS = -O3
