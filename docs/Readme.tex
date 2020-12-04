@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+
+%Packages BEGIN
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+%Packages END
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle} 
+
+
+\title{Data Structures PA1 Report}
+\author{{\scriptsize B07202020}\\Hao-Chien Wang}
+
+\begin{document}
+\maketitle
+
+\section{Usage}%
+Use \texttt{./bin/pagerank <DIFF> <d>} to run the program. The input files are
+placed under \texttt{./input/} and the output files are generated under the main
+folder (\texttt{./}). The scripts are placed under \texttt{./src/} and can be 
+compiled using \texttt{make}. You can also run the script \texttt{./runall.sh}
+to run for all input combinations. Use \texttt{make clean} to clean output files,
+executables and \texttt{*.o} files.
+
+\section{Data Structures and Algorithms}%
+
+I wrote my program in c++. I defined 2 classes: \texttt{Page} and 
+\texttt{FindPageRank}. The foremer stores the index of the page (for example,
+the index of \texttt{page499} is 499, saved as \texttt{int}), the number of 
+outbranching links (\texttt{int}), pages it links to (\texttt{vector<int>}, storing
+indices of the pages) and its page rank (\texttt{double}). The latter reads
+the input, compute page ranks and output the requested files. It stores the following
+information:
+\begin{enumerate}
+	\item Both input values \texttt{DIFF} and \texttt{d} (as \texttt{double})
+	\item A wordlist (\texttt{map<string, set<int>*}) with the string being all
+		the words mentioned in the pages and the set (that the pointer points 
+		to) saving the indices of the pages that mentioned the word. 
+	\item An array of pages, saving all the \texttt{Pages} objects.
+\end{enumerate}
+All the above are defined in \texttt{src/pagerank.h} and \texttt{src/pagerank.cpp}. 
+The output is generated in the following steps:
+
+\begin{enumerate}
+	\item Read input, create \texttt{Page} objects, generate wordlist and
+		\texttt{reverseindex.txt} (done by the constructor of \texttt{FindPageRank}).
+	\item Iterate until the terminating conditions are met (done by 
+		\texttt{FindPageRank.iterate()}).
+	\item Output \texttt{pr\_xx\_yyy.txt} (done by \texttt{FindPageRank.printPR()}).
+	\item Read \texttt{list.txt}, search in wordlist according to it and output 
+		\texttt{result\_xx\_yyy.txt} (done by \texttt{FindPageRank.search()}).
+\end{enumerate}
+
+\end{document}
