@@ -55,8 +55,8 @@ I wrote my program in c++. I defined 2 classes: \texttt{Page} and
 \texttt{FindPageRank}. The foremer stores the index of the page (for example,
 the index of \texttt{page499} is 499, saved as \texttt{int}), the number of 
 outbranching links (\texttt{int}), pages it links to (\texttt{vector<int>}, storing
-indices of the pages) and its page rank (\texttt{double}). The latter reads
-the input, compute page ranks and output the requested files. It stores the following
+indices of the pages) and its pagerank (\texttt{double}). The latter reads
+the input, compute pageranks and output the requested files. It stores the following
 information:
 \begin{enumerate}
 	\item Both input values \texttt{DIFF} and \texttt{d} (as \texttt{double})
@@ -76,6 +76,37 @@ The output is generated in the following steps:
 	\item Output \texttt{pr\_xx\_yyy.txt} (done by \texttt{FindPageRank.printPR()}).
 	\item Read \texttt{list.txt}, search in wordlist according to it and output 
 		\texttt{result\_xx\_yyy.txt} (done by \texttt{FindPageRank.search()}).
+\end{enumerate}
+
+\section{Complexity Analysis}%
+The space complexity is $O\left(n^2\right)$ since we need to save all the pages,
+and the size of each pages is $O(n)$ (assuming sorting does not use memory exceeding
+$O\left(n^2\right)$). To analyze time complexity, we first examine
+each steps:
+
+\begin{enumerate}
+	\item Reading input\\
+	Reading the outbranching links takes $O\left(n^2\right)$ since we need to
+	read all the input files and save them in our data structures. Reading
+	the words mentioned in each pages is obviously $O(nw)$, where $w$ is the words
+	mentioned by each pages. Writing \texttt{reverseindex.txt} also takes
+	$O(nw)$. Therefore the time complexity of this step is $O\left(n^2+nw\right)$.
+		
+	\item Iteration\\
+	In this step we compute the expression:
+	\begin{equation*}
+		M(M(M \cdots (M\vec{v}_0 + \vec{v}_1) + \vec{v}_1 ) + \vec{v}_1) \cdots + \vec{v} _1 
+		= M^n \vec{v}_0 + \left(M^{n-1} + M^{n-2} + \cdots+ M + I\right) \vec{v}_1 
+	\end{equation*}
+	This expression converges exponentially fast (note that the second term is 
+	a geometric series). Therefore the time complexity of this step is
+	$O\left(-\log d - \log \text{DIFF}\right)$
+
+	\item Print pagerank outputs.\\
+	The time complexity of this step is obviously $O(n)$.
+
+	\item Searching\\
+
 \end{enumerate}
 
 \end{document}

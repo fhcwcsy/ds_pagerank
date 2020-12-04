@@ -230,7 +230,7 @@ void FindPageRank::search()
 				sort(results.begin(), results.end());
 				reverse(results.begin(), results.end());
 				fout << "page" << results[0].index();
-				for(int i = 1; i<int(results.size()); i++)
+				for(int i = 1; i<min(int(results.size()), 10); i++)
 				{
 					fout << " page" << results[i].index();
 				}
@@ -261,7 +261,7 @@ void FindPageRank::search()
 				sort(results.begin(), results.end());
 				reverse(results.begin(), results.end());
 				fout << "OR page" << results[0].index();
-				for(int i = 1; i<int(results.size()); i++)
+				for(int i = 1; i<min(int(results.size()), 10); i++)
 				{
 					fout << " page" << results[i].index();
 				}
@@ -310,7 +310,7 @@ void FindPageRank::search()
 				sort(results.begin(), results.end());
 				reverse(results.begin(), results.end());
 				fout << "AND page" << results[0].index();
-				for(int i = 1; i<int(results.size()); i++)
+				for(int i = 1; i<min(int(results.size()), 10); i++)
 				{
 					fout << " page" << results[i].index();
 				}
