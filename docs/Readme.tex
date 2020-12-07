@@ -95,14 +95,18 @@ case scenario.
 	$O(nw)$. Therefore the time complexity of this step is $O\left(n^2+nw\right)$.
 		
 	\item Iteration\\
-	In this step we compute the expression:
+	This step is a iteration of linear transformations, which we compute the 
+	expression:
 	\begin{equation*}
 		M(M(M \cdots (M\vec{v}_0 + \vec{v}_1) + \vec{v}_1 ) + \vec{v}_1) \cdots + \vec{v} _1 
 		= M^n \vec{v}_0 + \left(M^{n-1} + M^{n-2} + \cdots+ M + I\right) \vec{v}_1 
 	\end{equation*}
+	where $\vec{v}_0$ is the initial page rank vector and $M$ and $\vec{v}_1$ 
+	are the parameters related to the links.
 	This expression converges exponentially fast (note that the second term is 
 	a geometric series). Therefore the time complexity of this step is
-	$O\left(-\log d - \log \text{DIFF}\right)$
+	$O\left(- \log \text{DIFF}\right)$. (I have omitted the dependency on $d$
+	since it is rather complex, but it shouldn't affect much on the time complexity.)
 
 	\item Print pagerank outputs.\\
 	The time complexity of this step is obviously $O(n)$.
@@ -113,15 +117,16 @@ case scenario.
 	$O(\log n)$ time to find the word in the wordlist. For a $m$-multiple-word
 	search, Finding the union takes $O(mn)$, and finding the intersection takes
 	$O(mn\log n)$. Therefore the overall time complexity of this step is
-	\begin{equation*}
-		O\left(\underbrace{s_1 n \log n}_\text{single-word search} + 
-		\underbrace{\sum_m s_m mn\log n}_{m\text{-multiple-words search}}\right)
-	\end{equation*}
+	\begin{align*}
+		&O\left(\underbrace{s_1 n \log n}_\text{single-word search} + 
+		\underbrace{\sum_m s_m mn\log n}_{m\text{-multiple-words search}}\right)\\
+		=& O \left(\sum_m s_m mn\log n\right)
+	\end{align*}
 	where $s_m$ is the number of $m$-multiple-word searches.
 \end{enumerate}
 From the analysis above, we can see that the total time complexity is:
 \begin{equation*}
-	O\left(n^2 + nw -\log d - \log \text{DIFF} + s_1 n \log n + \sum_m s_m mn\log n\right)
+	O\left(n^2 + nw -\log d - \log \text{DIFF} + \sum_m s_m mn\log n\right)
 \end{equation*}
 
 
